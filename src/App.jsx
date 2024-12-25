@@ -93,7 +93,7 @@ const App = () => {
       ],
       sunday: [
         {
-          name: '临床解剖学(511005.03) (马钊,王志新)',
+          name: '【全天】临床解剖学(511005.03) (马钊,王志新)',
           time: '(盆部、会阴)(9-14)',
           weeks: [9, 10, 11, 12, 13, 14],
         },
@@ -329,6 +329,11 @@ const App = () => {
     ) : null;
   };
 
+  const renderRowSpan = (period) => {
+    // 判断是否是需要合并的节次
+    return period % 2 === 1 ? 2 : 0; // 奇数节次显示，偶数节次合并至奇数节
+  };
+
   return (
     <div className="max-w-6xl mx-auto p-4">
       <div className="mb-4">
@@ -361,9 +366,9 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((period) => (
+            {[1, 3, 5, 7, 9].map((period) => (
               <tr key={period}>
-                <td className="border p-2 bg-yellow-100">第{period}节</td>
+                <td className="border p-2 bg-yellow-100">第{period} {period<9 ? "-"+(period+1) : ""}节</td>
                 <td className="border">{renderCourses(period, 'monday')}</td>
                 <td className="border">{renderCourses(period, 'tuesday')}</td>
                 <td className="border">{renderCourses(period, 'wednesday')}</td>
